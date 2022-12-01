@@ -1,0 +1,94 @@
+include "std.kf" end
+
+func part1 void -- void in
+	0 // maximum
+	0 // local counter
+	get_content_of_input
+	while over 0 eq not do
+		get_line
+		if str_to_int do
+			rot rot
+			str_pack
+			rot rot
+			plus
+			swap
+			str_unpack
+		else
+			drop
+			str_pack
+			rot rot
+			if over over lt do
+				swap drop 0
+			else
+				drop 0
+			end
+			rot
+			str_unpack
+		end
+	end drop drop drop
+	printi
+end
+
+func part2 void -- void in
+	24 memory // 3 maximum
+	0 // local counter
+	get_content_of_input
+	while over 0 eq not do
+		get_line
+		if str_to_int do
+			rot rot
+			str_pack
+			rot rot
+			plus
+			swap
+			str_unpack
+		else
+			drop
+			str_pack
+			rot rot
+
+			swap
+
+			if   over over 0  ptrplus pread gt do
+				dup 8 ptrplus pread
+				over 16 ptrplus swap pwrite
+
+				dup pread
+				over 8 ptrplus swap pwrite
+
+				over over swap pwrite
+				swap drop 0
+			elif over over 8  ptrplus pread gt do
+				dup 8 ptrplus pread
+				over 16 ptrplus swap pwrite
+
+				over over 8  ptrplus swap pwrite
+				swap drop 0
+			elif over over 16 ptrplus pread gt do
+				over over 16 ptrplus swap pwrite
+				swap drop 0
+			else
+				swap drop 0
+			end
+
+			rot
+			str_unpack
+		end
+	end drop drop drop
+	0
+	over 0  ptrplus pread plus
+	over 8  ptrplus pread plus
+	over 16 ptrplus pread plus
+	swap drop
+	printi
+end
+
+func main void -- void in
+	if argc 2 eq not do
+		"The input file only must be given as a parameter\n"
+		eprints
+		1 exit
+	end
+	"Part 1 = " prints part1 '\n' printc
+	"Part 2 = " prints part2 '\n' printc
+end
