@@ -1,0 +1,91 @@
+include "std.kf" end
+
+func part1 void -- void in
+	0 // maximum
+	get_content_of_input
+
+	while over 0 eq not do
+		get_line
+		swap drop
+		dup pread8 // oponent play
+		swap 2 ptrplus pread8 // player play
+
+		'X' minus 1 plus
+		swap
+		'A' minus 1 plus
+		swap
+
+		if over over eq do // draw, increment player play by 3
+			drop 3 plus
+		elif
+			if   over over 1 eq swap 3 eq and do true
+			elif over over 2 eq swap 1 eq and do true
+			elif over over 3 eq swap 2 eq and do true
+			else false end  
+		do // win
+			swap drop 6 plus
+		else // loss
+			swap drop
+		end
+
+		rot rot
+		str_pack
+		rot rot
+		plus
+		swap
+		str_unpack
+	end drop drop
+	printi
+end
+
+func part2 void -- void in
+	0 // maximum
+	get_content_of_input
+
+	while over 0 eq not do
+		get_line
+		swap drop
+		dup pread8 // oponent play
+		swap 2 ptrplus pread8 // player play
+
+		'X' minus 3 mult
+		swap
+		'A' minus 1 plus
+		swap
+
+		if dup 3 eq do // draw
+			plus
+		elif dup 0 eq do // loss
+			drop
+			if   dup 1 eq do drop 3
+			elif dup 2 eq do drop 1
+			else             drop 2
+			end
+		else // win
+			swap
+			if   dup 1 eq do drop 2
+			elif dup 2 eq do drop 3
+			else             drop 1
+			end
+			plus
+		end
+
+		rot rot
+		str_pack
+		rot rot
+		plus
+		swap
+		str_unpack
+	end drop drop
+	printi
+end
+
+func main void -- void in
+	if argc 2 eq not do
+		"The input file only must be given as a parameter\n"
+		eprints
+		1 exit
+	end
+	"Part 1 = " prints part1 '\n' printc
+	"Part 2 = " prints part2 '\n' printc
+end
