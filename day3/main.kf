@@ -1,0 +1,164 @@
+include "std.kf" end
+
+func str_contains_char
+int ptr // str
+int     // char
+--
+bool
+in
+	rot rot
+	str_pack
+	false
+	rot rot
+
+	while dup str_unpack drop 0 eq not do
+		over over
+		str_unpack
+		pread8 swap drop
+		eq
+
+		9 memory // lord pardon me for the sins i am about to commit
+		save
+		rot int pwrite
+		rot rot save 8 ptrplus swap pwrite8
+		rot or
+		
+		swap dup
+		8 ptrplus pread8
+		swap pread ptr
+		
+		str_unpack
+		1 ptrplus
+		swap 1 minus swap
+
+		str_pack
+	end drop drop
+end
+
+func part1 void -- void in
+	0 // sum
+	get_content_of_input
+
+	while over 0 eq not do
+		get_line
+
+		over over swap 2 div swap str_pack 
+		rot rot
+		swap 2 div swap over ptrplus str_pack
+
+		0 rot rot
+
+		while over str_unpack drop 0 eq not do
+			rot drop
+			over str_unpack
+			pread8 swap drop
+
+			over str_unpack rot
+			if str_contains_char do
+				over str_unpack
+				pread8 swap drop rot rot
+				swap str_unpack
+				swap drop 0 swap str_pack swap
+			else
+				swap str_unpack
+				swap 1 plus swap 1 ptrplus
+				str_pack swap
+				0 rot rot
+			end
+		end drop drop 
+
+		if dup 'a' gteq over 'z' lteq and do
+			'a' minus 1 plus
+		else
+			'A' minus 1 plus 26 plus
+		end
+
+		rot rot
+		str_pack
+		rot rot plus swap
+		str_unpack
+	end drop drop
+	printi
+end
+
+func part2 void -- void in
+	get_content_of_input
+	str_pack
+	0 // sum
+	24 memory // contains 3 strings
+	while rot str_unpack over 0 eq not do
+		get_line str_pack int
+		rot rot  str_pack
+		rot rot
+		over swap pwrite
+
+		swap str_unpack
+
+		get_line str_pack int
+		rot rot  str_pack
+		rot rot
+		over 8 ptrplus swap pwrite
+		swap str_unpack
+
+		get_line str_pack int
+		rot rot  str_pack
+		rot rot
+		over 16 ptrplus swap pwrite
+		rot swap
+
+		0 // char
+
+		while
+			over
+			pread ptr
+			str_unpack
+			over 0 eq not
+		do
+
+			swap drop swap drop pread8
+			over 8 ptrplus pread ptr
+			over swap str_unpack
+			rot
+
+			if str_contains_char do
+				over 16 ptrplus pread ptr
+				over swap str_unpack
+				rot
+
+				if str_contains_char do
+					if dup 'a' gteq over 'z' lteq and do
+						'a' minus 1 plus
+					else
+						'A' minus 1 plus 26 plus
+					end
+
+					over pread ptr
+					0 pwrite
+					rot plus swap 0
+				else
+					over pread ptr
+					dup pread 1 plus over swap pwrite
+					8 ptrplus
+					dup pread 1 plus pwrite
+				end
+			else
+				over pread ptr
+				dup pread 1 plus over swap pwrite
+				8 ptrplus
+				dup pread 1 plus pwrite
+			end
+		end drop drop drop
+	end drop drop drop
+
+	printi
+end
+
+func main void -- void in
+	if argc 2 eq not do
+		"The input file only must be given as a parameter\n"
+		eprints
+		1 exit
+	end
+	"Part 1 = " prints part1 '\n' printc
+	"Part 2 = " prints part2 '\n' printc
+end
