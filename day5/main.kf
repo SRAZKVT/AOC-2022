@@ -1,0 +1,190 @@
+include "std.kf" end
+
+func str_word_size
+int ptr // str
+--
+int     // amount of characters in line
+in
+	0 rot rot
+	while dup pread8 ' ' eq not do
+		ptrinc
+		rot 1 plus
+		rot 1 minus
+		rot
+	end drop drop
+end
+
+func get_word
+int ptr // str
+--
+int ptr // remaining string
+int ptr // split line
+in
+	over over str_word_size get_first_n
+end
+
+/// Stack: 
+/// First 8 bytes are the current top of array, followed by size of array * 8 bytes, which are the content
+
+func stack_push ptr int -- void in
+	swap
+	if dup pread dup 128 eq do
+		here prints "Stack overflow" prints 1 exit
+	end
+	over over 1 plus pwrite
+	8 mult 8 plus
+	ptrplus swap pwrite
+end
+
+func stack_pop ptr -- int in
+	if dup pread dup 0 eq do
+		here prints "Stack underflow" prints 1 exit
+	end
+	over over 1 minus pwrite
+	8 mult
+	ptrplus pread
+end
+
+func stack_size ptr -- int in
+	pread
+end
+
+func stack_reverse ptr -- void in
+	1032 memory // one stack of 128 integers
+	swap
+
+	while dup stack_size 0 eq not do
+		over over
+		stack_pop
+		stack_push
+	end
+	0 
+	while dup 1032 eq not do
+		save
+		rot save
+		rot save
+		rot save
+		ptrplus
+		rot rot swap
+		ptrplus
+		over over
+		pread8 swap pread8
+		rot swap pwrite8
+		pwrite8
+		rot
+		1 plus
+	end drop drop drop
+end
+
+func stack_amt void -- ptr in
+	1 memory
+end
+
+func part1 void -- void in
+	// (8 + (8 * 128)) * 9
+	9288 memory // array of 9 stacks of capacity 128 ints each
+
+	get_content_of_input str_pack
+
+	while over swap
+		str_unpack
+		get_line
+		str_pack
+		rot rot str_pack
+		rot rot
+		dup str_unpack drop 0 eq not
+	do
+		str_unpack
+		ptrinc
+		swap dec swap
+		while over 1 gt do
+			if dup pread8 is_digit not do
+				dup pread8
+				if dup ' ' eq not do
+					rot rot str_pack
+					rot rot
+					over swap stack_push
+				else
+					drop
+					str_pack
+					swap
+				end
+				1032 ptrplus
+				swap
+				str_unpack
+				4 ptrplus swap 4 minus swap
+			else
+				dup pread8 '0' minus
+				stack_amt swap pwrite8
+				4 ptrplus swap 4 minus swap
+			end
+		end drop drop drop
+	end drop drop
+	swap
+
+	0 while dup stack_amt pread8 eq not do
+		over over 1032 mult ptrplus
+		stack_reverse
+		1 plus
+	end drop
+
+	swap
+	str_unpack
+	while over 5 gt do
+		get_line
+		str_pack
+		rot rot str_pack swap
+		rot save
+		swap str_unpack
+		5 ptrplus
+		swap 5 minus swap
+		get_word str_to_int drop
+		rot rot str_pack
+		rot rot
+		swap
+		rot
+		str_unpack
+		get_word drop drop
+		get_word str_to_int drop
+		rot rot str_pack
+		rot save rot 
+		1 minus 1032 mult ptrplus
+		rot rot
+		str_unpack
+		get_word drop drop
+		get_word get_line str_to_int drop
+		rot rot drop drop rot rot drop drop
+		1 minus 1032 mult ptrplus
+
+		while rot dup 0 eq not do
+			1 minus
+			rot rot
+			over over swap stack_pop stack_push
+		end drop drop drop
+
+		str_unpack
+	end drop drop
+
+
+	0 while dup stack_amt pread8 eq not do
+		over over 1032 mult ptrplus
+		stack_pop printc
+		1 plus
+	end drop
+
+	drop
+end
+
+func part2 void -- void in
+	"Not implemented yet" prints
+end
+
+func main void -- void in
+	if argc 2 eq not do
+		"The input file only must be given as a parameter\n"
+		eprints
+		1 exit
+	end
+	"Part 1 = " prints part1 '\n' printc
+	"Part 2 = " prints part2 '\n' printc
+end
