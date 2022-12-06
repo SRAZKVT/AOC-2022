@@ -1,0 +1,608 @@
+include "std.kf" end
+
+func part1 void -- void in
+	0
+	4 memory
+	get_content_of_input str_pack
+
+	while
+		dup str_unpack
+		drop 0 eq not
+	do
+		rot 1 plus rot rot
+
+		swap dup 2 ptrplus pread8
+		over 3 ptrplus swap pwrite8 swap
+
+		swap dup 1 ptrplus pread8
+		over 2 ptrplus swap pwrite8 swap
+
+		swap dup           pread8
+		over 1 ptrplus swap pwrite8
+
+		over str_unpack swap drop
+		pread8
+		over swap pwrite8
+
+		if
+			false swap
+
+			dup pread8
+			over 1 ptrplus pread8
+			eq
+			rot or swap
+
+			dup pread8
+			over 2 ptrplus pread8
+			eq
+			rot or swap
+
+			dup pread8
+			over 3 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 2 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 3 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 3 ptrplus pread8
+			eq
+			rot or swap
+
+			swap
+
+			over 3 ptrplus pread8 0 eq or
+		do
+			swap str_unpack
+			swap 1 minus swap ptrinc str_pack
+		else
+			swap str_unpack
+			swap drop 0 swap str_pack
+		end
+	end drop drop
+	printi
+end
+
+func part2 void -- void in
+	0
+	14 memory
+	get_content_of_input str_pack
+
+	while
+		dup str_unpack
+		drop 0 eq not
+	do
+		rot 1 plus rot rot
+
+		swap dup 12 ptrplus pread8
+		over 13 ptrplus swap pwrite8 swap
+
+		swap dup 11 ptrplus pread8
+		over 12 ptrplus swap pwrite8 swap
+
+		swap dup 10 ptrplus pread8
+		over 11 ptrplus swap pwrite8 swap
+
+		swap dup 9 ptrplus pread8
+		over 10 ptrplus swap pwrite8 swap
+
+		swap dup 8 ptrplus pread8
+		over 9 ptrplus swap pwrite8 swap
+
+		swap dup 7 ptrplus pread8
+		over 8 ptrplus swap pwrite8 swap
+
+		swap dup 6 ptrplus pread8
+		over 7 ptrplus swap pwrite8 swap
+
+		swap dup 5 ptrplus pread8
+		over 6 ptrplus swap pwrite8 swap
+
+		swap dup 4 ptrplus pread8
+		over 5 ptrplus swap pwrite8 swap
+
+		swap dup 3 ptrplus pread8
+		over 4 ptrplus swap pwrite8 swap
+
+		swap dup 2 ptrplus pread8
+		over 3 ptrplus swap pwrite8 swap
+
+		swap dup 1 ptrplus pread8
+		over 2 ptrplus swap pwrite8 swap
+
+		swap dup           pread8
+		over 1 ptrplus swap pwrite8
+
+		over str_unpack swap drop
+		pread8
+		over swap pwrite8
+
+		if
+			false swap
+
+			dup  0 ptrplus pread8
+			over 1 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 2 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 3 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 4 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 5 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 6 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 7 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 8 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  0 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 2 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 3 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 4 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 5 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 6 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 7 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 8 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  1 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 3 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 4 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 5 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 6 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 7 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 8 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  2 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 4 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 5 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 6 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 7 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 8 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  3 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 5 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 6 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 7 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 8 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  4 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  5 ptrplus pread8
+			over 6 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  5 ptrplus pread8
+			over 7 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  5 ptrplus pread8
+			over 8 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  5 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  5 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  5 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  5 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  5 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  6 ptrplus pread8
+			over 7 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  6 ptrplus pread8
+			over 8 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  6 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  6 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  6 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  6 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  6 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  7 ptrplus pread8
+			over 8 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  7 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  7 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  7 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  7 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  7 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  8 ptrplus pread8
+			over 9 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  8 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  8 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  8 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  8 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  9 ptrplus pread8
+			over 10 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  9 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  9 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  9 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  10 ptrplus pread8
+			over 11 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  10 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  10 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  11 ptrplus pread8
+			over 12 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  11 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			dup  12 ptrplus pread8
+			over 13 ptrplus pread8
+			eq
+			rot or swap
+
+			swap
+
+			over 3 ptrplus pread8 0 eq or
+		do
+			swap str_unpack
+			swap 1 minus swap ptrinc str_pack
+		else
+			swap str_unpack
+			swap drop 0 swap str_pack
+		end
+	end drop drop
+	printi
+end
+
+func main void -- void in
+	if argc 2 eq not do
+		"The input file only must be given as a parameter\n"
+		eprints
+		1 exit
+	end
+	"Part 1 = " prints part1 '\n' printc
+	"Part 2 = " prints part2 '\n' printc
+end
